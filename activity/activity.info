@@ -1,7 +1,7 @@
 [Activity]
-name = Bingo
+name = Dots
 activity_version = 1
-bundle_id = org.sugarlabs.Bingo
+bundle_id = org.sanatakc.Dots
 exec = sugar-activity-web
 icon = activity-icon
-repository = https://github.com/EmilyOng/Bingo.activity.git
+repository = https://github.com/sanatankc/dots.activity.git
