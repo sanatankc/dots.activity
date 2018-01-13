@@ -7902,6 +7902,8 @@ var CanvasBoard = function (_Component) {
     _this.eatSound = new Audio('sounds/eat.wav');
     _this.gameOver = new Audio('sounds/game_over.wav');
     _this.gameOver.volume = 0.5;
+    _this.doBallLeft = _this.doBallLeft.bind(_this);
+    _this.doBallRight = _this.doBallRight.bind(_this);
     return _this;
   }
 
@@ -7952,18 +7954,28 @@ var CanvasBoard = function (_Component) {
       var key = e.key;
 
       if (key === 'ArrowLeft') {
-        this.click.play();
-        this.setState(function (prev) {
-          var stateToset = prev.centerBallState === 0 ? 3 : prev.centerBallState - 1;
-          return { centerBallState: stateToset };
-        });
+        this.doBallLeft();
       } else if (key === 'ArrowRight') {
-        this.click.play();
-        this.setState(function (prev) {
-          var stateToset = prev.centerBallState === 3 ? 0 : prev.centerBallState + 1;
-          return { centerBallState: stateToset };
-        });
+        this.doBallRight();
       }
+    }
+  }, {
+    key: 'doBallLeft',
+    value: function doBallLeft() {
+      this.click.play();
+      this.setState(function (prev) {
+        var stateToset = prev.centerBallState === 0 ? 3 : prev.centerBallState - 1;
+        return { centerBallState: stateToset };
+      });
+    }
+  }, {
+    key: 'doBallRight',
+    value: function doBallRight() {
+      this.click.play();
+      this.setState(function (prev) {
+        var stateToset = prev.centerBallState === 3 ? 0 : prev.centerBallState + 1;
+        return { centerBallState: stateToset };
+      });
     }
   }, {
     key: 'handleCanvasSize',
@@ -8013,7 +8025,12 @@ var CanvasBoard = function (_Component) {
         onPlayClick: this.onPlayClick.bind(this),
         key: 0,
         score: this.state.score,
-        bestScore: this.state.bestScore
+        bestScore: this.state.bestScore,
+        innerRef: function innerRef(overlay) {
+          _this3.overlay = overlay;
+        },
+        doBallLeft: this.doBallLeft,
+        doBallRight: this.doBallRight
       }), _react2.default.createElement(Canvas, { innerRef: function innerRef(canvas) {
           _this3.canvas = canvas;
         }, key: 1 })];
@@ -12688,8 +12705,25 @@ var Overlay = function (_Component) {
   }
 
   _createClass(Overlay, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.main.addEventListener('click', function (e) {
+        var centerX = _this2.main.offsetWidth / 2;
+        var isOnLeft = centerX > e.offsetX;
+        if (isOnLeft) {
+          _this2.props.doBallLeft();
+        } else {
+          _this2.props.doBallRight();
+        }
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this3 = this;
+
       var _props = this.props,
           onPlayClick = _props.onPlayClick,
           isPlaying = _props.isPlaying,
@@ -12699,7 +12733,9 @@ var Overlay = function (_Component) {
 
       return _react2.default.createElement(
         Main,
-        null,
+        { innerRef: function innerRef(main) {
+            _this3.main = main;
+          } },
         _react2.default.createElement(
           Wrapper,
           null,

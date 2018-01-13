@@ -43,10 +43,22 @@ const Wrapper = styled.div`
   display: block;
 `
 export default class Overlay extends Component {
+  componentDidMount() {
+    this.main.addEventListener('click', (e) => {
+      const centerX = this.main.offsetWidth / 2
+      const isOnLeft = centerX > e.offsetX
+      if (isOnLeft) {
+        this.props.doBallLeft()
+      } else {
+        this.props.doBallRight()
+      }
+    })
+  }
+
   render() {
     const { onPlayClick, isPlaying, score, bestScore, isFirstTime } = this.props
     return (
-      <Main>
+      <Main innerRef={main => {this.main = main}}>
         <Wrapper>
           <div>
             <Score>{score}</Score>

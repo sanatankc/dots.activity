@@ -24,6 +24,8 @@ export default class CanvasBoard extends Component {
     this.eatSound = new Audio('sounds/eat.wav')
     this.gameOver = new Audio('sounds/game_over.wav')
     this.gameOver.volume = 0.5
+    this.doBallLeft = this.doBallLeft.bind(this)
+    this.doBallRight = this.doBallRight.bind(this)
   }
 
   componentDidMount() {
@@ -38,11 +40,11 @@ export default class CanvasBoard extends Component {
       this.setBestScore.bind(this),
       this.eatSound,
       this.gameOver
-  )
-  this.draw()
-  window.addEventListener('resize', () => {
-    this.handleCanvasSize()
-  })
+    )
+    this.draw()
+    window.addEventListener('resize', () => {
+      this.handleCanvasSize()
+    })
     window.addEventListener('keydown', debounce(this.handleKeyDown.bind(this)))
   }
 
@@ -70,18 +72,26 @@ export default class CanvasBoard extends Component {
     const { centerBallState } = this.state
     const { key } = e
     if (key === 'ArrowLeft') {
-      this.click.play()
-      this.setState(prev => {
-        const stateToset = prev.centerBallState === 0 ? 3 : prev.centerBallState - 1
-        return { centerBallState: stateToset }
-      })
+      this.doBallLeft()
     } else if (key === 'ArrowRight') {
-      this.click.play()
-      this.setState(prev => {
-        const stateToset = prev.centerBallState === 3 ? 0 : prev.centerBallState + 1
-        return { centerBallState: stateToset }
-      })
+      this.doBallRight()
     }
+  }
+
+  doBallLeft() {
+    this.click.play()
+    this.setState(prev => {
+      const stateToset = prev.centerBallState === 0 ? 3 : prev.centerBallState - 1
+      return { centerBallState: stateToset }
+    })
+  }
+
+  doBallRight() {
+    this.click.play()
+    this.setState(prev => {
+      const stateToset = prev.centerBallState === 3 ? 0 : prev.centerBallState + 1
+      return { centerBallState: stateToset }
+    })
   }
 
   handleCanvasSize() {
@@ -127,6 +137,9 @@ export default class CanvasBoard extends Component {
         key={0}
         score={this.state.score}
         bestScore={this.state.bestScore}
+        innerRef={overlay => {this.overlay = overlay}}
+        doBallLeft={this.doBallLeft}
+        doBallRight={this.doBallRight}
       />,
       <Canvas innerRef={canvas => {this.canvas = canvas}} key={1} ></Canvas>
     ])
