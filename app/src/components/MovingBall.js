@@ -21,6 +21,10 @@ export default class MovingBall {
     this.moveRandom()
   }
 
+  handleResize(windowWidth, windowHeight) {
+    this.x = windowWidth
+  }
+
   draw(playerState, isPlaying) {
     if (isPlaying) {
       this.randomMotion[1]()

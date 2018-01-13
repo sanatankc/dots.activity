@@ -7972,13 +7972,18 @@ var CanvasBoard = function (_Component) {
       this.windowWidth = window.innerWidth;
       this.canvas.height = this.windowHeight > 800 ? 800 : this.windowHeight;
       this.canvas.width = this.windowWidth > 800 ? 800 : this.windowWidth;
+      try {
+        this.movingBall.handleResize();
+      } catch (err) {
+        console.error('Error in resizing canvas');
+      }
     }
   }, {
     key: 'draw',
     value: function draw() {
       requestAnimationFrame(this.draw.bind(this));
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      this.movingBall.draw(this.state.centerBallState, this.state.isPlaying);
+      this.movingBall.draw(this.state.centerBallState, this.state.isPlaying, this);
       (0, _centerBalls2.default)(this.ctx, this.canvas.width / 2, this.canvas.height / 2, this.state.centerBallState);
     }
   }, {
@@ -12381,6 +12386,11 @@ var MovingBall = function () {
   }
 
   _createClass(MovingBall, [{
+    key: 'handleResize',
+    value: function handleResize(windowWidth, windowHeight) {
+      this.x = windowWidth;
+    }
+  }, {
     key: 'draw',
     value: function draw(playerState, isPlaying) {
       if (isPlaying) {

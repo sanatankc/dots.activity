@@ -39,10 +39,10 @@ export default class CanvasBoard extends Component {
       this.eatSound,
       this.gameOver
   )
-    this.draw()
-    window.addEventListener('resize', () => {
-      this.handleCanvasSize()
-    })
+  this.draw()
+  window.addEventListener('resize', () => {
+    this.handleCanvasSize()
+  })
     window.addEventListener('keydown', debounce(this.handleKeyDown.bind(this)))
   }
 
@@ -89,12 +89,17 @@ export default class CanvasBoard extends Component {
     this.windowWidth = window.innerWidth
     this.canvas.height = (this.windowHeight > 800) ? 800 : this.windowHeight
     this.canvas.width = (this.windowWidth > 800) ? 800 : this.windowWidth
+    try {
+      this.movingBall.handleResize()
+    } catch(err) {
+      console.error('Error in resizing canvas')
+    }
   }
 
   draw() {
     requestAnimationFrame(this.draw.bind(this))
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
-    this.movingBall.draw(this.state.centerBallState, this.state.isPlaying)
+    this.movingBall.draw(this.state.centerBallState, this.state.isPlaying, this)
     centerBalls(this.ctx, (this.canvas.width / 2), (this.canvas.height / 2), this.state.centerBallState)
   }
 
