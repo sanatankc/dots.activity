@@ -8074,7 +8074,7 @@ var Toolbar = function (_Component) {
       return _react2.default.createElement(
         "div",
         { id: "main-toolbar", className: "react-toolbar toolbar" },
-        _react2.default.createElement("button", { className: "toolbutton", id: "activity-button", title: "My Activity" }),
+        _react2.default.createElement("button", { className: "toolbutton", id: "activity-button", title: "Dots.activity" }),
         _react2.default.createElement("button", { className: "toolbutton pull-right", id: "stop-button", title: "Stop" })
       );
     }
