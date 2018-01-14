@@ -22,7 +22,16 @@ export default class MovingBall {
   }
 
   handleResize(windowWidth, windowHeight) {
-    this.x = windowWidth
+    console.log(this.x)
+    this.windowWidth = windowWidth
+    this.windowHeight = windowHeight
+    console.log(this.windowWidth, this.windowHeight)
+    if (this.motionState === 0 || this.motionState === 1) {
+      this.x = windowWidth / 2
+    } else {
+      this.y = windowHeight / 2
+    }
+    console.log(this.x)
   }
 
   draw(playerState, isPlaying) {

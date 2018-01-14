@@ -100,7 +100,7 @@ export default class CanvasBoard extends Component {
     this.canvas.height = (this.windowHeight > 800) ? 800 : this.windowHeight
     this.canvas.width = (this.windowWidth > 800) ? 800 : this.windowWidth
     try {
-      this.movingBall.handleResize()
+      this.movingBall.handleResize(this.canvas.width, this.canvas.height)
     } catch(err) {
       console.error('Error in resizing canvas')
     }
