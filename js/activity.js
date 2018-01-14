@@ -12659,8 +12659,9 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  max-width: 800px;\n  max-height: 800px;\n  width: 100vw;\n  height: calc(100vh - 55px) !important;\n'], ['\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  max-width: 800px;\n  max-height: 800px;\n  width: 100vw;\n  height: calc(100vh - 55px) !important;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  margin-top: -150px;\n  color: black;\n  text-align: center;\n  font-size: 36px;\n'], ['\n  margin-top: -150px;\n  color: black;\n  text-align: center;\n  font-size: 36px;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  margin-top: 20px;\n  color: black;\n  text-align: center;\n  font-size: 24px;\n  letter-spacing: 2.2px;\n  transition: 0.2s all ease-in-out;\n  opacity: ', '\n'], ['\n  margin-top: 20px;\n  color: black;\n  text-align: center;\n  font-size: 24px;\n  letter-spacing: 2.2px;\n  transition: 0.2s all ease-in-out;\n  opacity: ', '\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  background: ', ';\n  height: 55px;\n  width: 55px;\n  position: relative;\n  top: 137px;\n  left: 25px;\n  transition: 0.2s all ease-in-out;\n  opacity: ', '\n'], ['\n  background: ', ';\n  height: 55px;\n  width: 55px;\n  position: relative;\n  top: 137px;\n  left: 25px;\n  transition: 0.2s all ease-in-out;\n  opacity: ', '\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n  display: block;\n'], ['\n  display: block;\n']);
+    _templateObject4 = _taggedTemplateLiteral(['\n  background: ', ';\n  height: 55px;\n  width: 55px;\n  position: relative;\n  transition: 0.2s all ease-in-out;\n  opacity: ', ';\n  margin-bottom: 67px;\n  top: 180px;\n  left: 215px;\n'], ['\n  background: ', ';\n  height: 55px;\n  width: 55px;\n  position: relative;\n  transition: 0.2s all ease-in-out;\n  opacity: ', ';\n  margin-bottom: 67px;\n  top: 180px;\n  left: 215px;\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n  display: block;\n'], ['\n  display: block;\n']),
+    _templateObject6 = _taggedTemplateLiteral(['\n  position: relative;\n  top: 137px;\n  left: 25px;\n  text-align: center;\n  transition: 0.2s all ease-in-out;\n  opacity: ', ';\n'], ['\n  position: relative;\n  top: 137px;\n  left: 25px;\n  text-align: center;\n  transition: 0.2s all ease-in-out;\n  opacity: ', ';\n']);
 
 var _react = __webpack_require__(2);
 
@@ -12694,6 +12695,10 @@ var Replay = _styledComponents2.default.div(_templateObject4, function (_ref2) {
   return isPlaying ? 0 : 1;
 });
 var Wrapper = _styledComponents2.default.div(_templateObject5);
+var Help = _styledComponents2.default.p(_templateObject6, function (_ref4) {
+  var isPlaying = _ref4.isPlaying;
+  return isPlaying ? 0 : 1;
+});
 
 var Overlay = function (_Component) {
   _inherits(Overlay, _Component);
@@ -12753,7 +12758,17 @@ var Overlay = function (_Component) {
               'Best: ',
               bestScore
             ),
-            _react2.default.createElement(Replay, { onClick: onPlayClick, isPlaying: isPlaying, isFirstTime: isFirstTime })
+            _react2.default.createElement(Replay, { onClick: onPlayClick, isPlaying: isPlaying, isFirstTime: isFirstTime }),
+            _react2.default.createElement(
+              Help,
+              { isPlaying: isPlaying },
+              'Objective: Catch same color balls to gain points, avoid balls with different colors.'
+            ),
+            _react2.default.createElement(
+              Help,
+              { isPlaying: isPlaying },
+              'Use Arrow Left/Arrow Right ot Tap left/Tap Right on Screen to Rotate balls'
+            )
           )
         )
       );

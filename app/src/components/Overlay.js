@@ -34,13 +34,22 @@ const Replay  = styled.div`
   height: 55px;
   width: 55px;
   position: relative;
-  top: 137px;
-  left: 25px;
   transition: 0.2s all ease-in-out;
-  opacity: ${({isPlaying}) => isPlaying ? 0 : 1}
+  opacity: ${({isPlaying}) => isPlaying ? 0 : 1};
+  margin-bottom: 67px;
+  top: 180px;
+  left: 215px;
 `
 const Wrapper = styled.div`
   display: block;
+`
+const Help = styled.p`
+  position: relative;
+  top: 137px;
+  left: 25px;
+  text-align: center;
+  transition: 0.2s all ease-in-out;
+  opacity: ${({isPlaying}) => isPlaying ? 0 : 1};
 `
 export default class Overlay extends Component {
   componentDidMount() {
@@ -64,6 +73,8 @@ export default class Overlay extends Component {
             <Score>{score}</Score>
             <BestScore isPlaying={isPlaying}>Best: {bestScore}</BestScore>
             <Replay onClick={onPlayClick} isPlaying={isPlaying} isFirstTime={isFirstTime} />
+            <Help isPlaying={isPlaying} >Objective: Catch same color balls to gain points, avoid balls with different colors.</Help>
+            <Help isPlaying={isPlaying} >Use Arrow Left/Arrow Right ot Tap left/Tap Right on Screen to Rotate balls</Help>
           </div>
         </Wrapper>
       </Main>
